@@ -1,4 +1,6 @@
 <script>
+	// @ts-nocheck
+	// import { PrismaClient } from '@prisma/client';
 	import { page } from '$app/stores';
 	import { fly, fade, slide } from 'svelte/transition';
 	import { onMount } from 'svelte';
@@ -2546,7 +2548,8 @@
 		tabs.listBox.scrollTop = tabs.listElements[name].offsetTop;
 	};
 
-	onMount(() => {
+	onMount(async () => {
+    console.info($page)
 		ready = true;
 	});
 </script>
@@ -2600,11 +2603,11 @@
 						{/if}
 					</div>
 					<button
-							on:click={() => {
-								welcome = !welcome;
-							}}
-							class="btn menu-search"><img class="icon" src="/home-icon.png" alt="Назад" /></button
-						>
+						on:click={() => {
+							welcome = !welcome;
+						}}
+						class="btn menu-search"><img class="icon" src="/home-icon.png" alt="Назад" /></button
+					>
 				</div>
 				<div class="menu-wrapper" bind:this={tabs.listBox}>
 					<div bind:this={tabs.tabsBox} id="tabs" class="menu-tabs">
@@ -2752,11 +2755,11 @@
 						<div class="menu-cart" transition:fly={{ y: 200, duration: 600 }}>
 							<button
 								on:click={() => {
-									order = !order;
+									modal = true
 								}}
 								class="btn welcome-btn menu-cart-btn"
 							>
-								<div class="menu-cart-title">Заказать</div>
+								<div class="menu-cart-title">Заказать {cartSum()} <span>₽</span></div>
 							</button>
 						</div>
 					{/if}

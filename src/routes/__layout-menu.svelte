@@ -1,4 +1,5 @@
 <script>
+	import '../app.css';
   // your script goes here
 </script>
 
